@@ -43,7 +43,7 @@ def register():
         password = request.form['password']
         user1 = User.query.filter_by(username=username).first()
         user2 = User.query.filter_by(email=email).first()
-        if user1 is not None or user2 is not None:
+        if user1 is not None or user2 is not None or username == "" or email == "" or password == "" or ' ' in username or ' ' in email or ' ' in password:
             error = 'Error: Wrong input or this user already exists.'
             logging.info(error)
         else:
@@ -67,14 +67,11 @@ def at():
 
 @bp.route('/@<string:username>')
 def show_user_acc(username):
-    user = User.query.filter_by(username=username).first()
-    if user is None:
-        logging.debug(f'User {username} not found.')
-        return redirect(url_for('main.show_items'))
-    elif 'user' not in session or session['user'] != username:
+    if 'user' not in session or session['user'] != username:
         logging.info(f'Wrong')
         return redirect(url_for('main.show_items'))
     else:
+        user = User.query.filter_by(username=username).first()
         user_id = user.user_id
         orders = Order.query.filter_by(user_id=user_id).all()
         items = Item.query.filter_by(user_id=user_id).all()
@@ -91,8 +88,8 @@ def sell_item():
             about = request.form['about']
             pic = request.form['pic']
             price = request.form['price']
-            if about == "" or price == "":
-                error = "Please add product info."
+            if about == "" or about.count(' ') == len(about) or not price.isdigit():
+                error = "Please add product info correct."
                 return render_template('sell_item.html', username=username, error=error)
             user_id = User.query.filter_by(username=username).first().user_id
             new_product = Item(user_id=user_id, about=about, pic=pic, price=price)
