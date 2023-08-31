@@ -21,13 +21,10 @@ def login():
     if 'user' in session:
         return redirect(url_for('main.show_items'))
     if request.method == 'POST':
-        users = User.query.all()
-        usernames = []
-        for u in users:
-            usernames.append(u.username)
         username = request.form['username']
         password = request.form['password']
-        if username not in usernames or password != User.query.filter_by(username=username).first().password:
+        user = User.query.filter_by(username=username).first()
+        if user is None or password != user.password:
             error = 'Invalid Credentials. Please try again.'
             logging.info(error)
         else:
@@ -37,7 +34,38 @@ def login():
     return render_template('login.html', error=error)
 
 
-@bp.route('/<string:username>')
+@bp.route('/register', methods=['GET', 'POST'])
+def register():
+    error = None
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+        user1 = User.query.filter_by(username=username).first()
+        user2 = User.query.filter_by(email=email).first()
+        if user1 is not None or user2 is not None:
+            error = 'Error: Wrong input or this user already exists.'
+            logging.info(error)
+        else:
+            new_user = User(username=username, password=password, email=email)
+            db.session.add(new_user)
+            db.session.commit()
+            return redirect(url_for('main.login'))
+    return render_template('register.html', error=error)
+
+
+@bp.route('/logout', methods=['POST'])
+def logout():
+    session.pop('user')
+    return redirect(url_for('main.login'))
+
+
+@bp.route('/@')
+def at():
+    return redirect(url_for('main.login'))
+
+
+@bp.route('/@<string:username>')
 def show_user_acc(username):
     user = User.query.filter_by(username=username).first()
     if user is None:

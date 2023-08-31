@@ -36,5 +36,8 @@
              </div>
         {% endfor %}
     </div>
+    <form action="{{ url_for('main.logout') }}" method=post>
+        <input type=submit value="Logout">
+    </form>
   </body>
 </html>

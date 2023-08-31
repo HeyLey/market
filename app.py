@@ -10,7 +10,7 @@ def create_app():
     app = Flask(__name__)
     app.register_blueprint(bp)
     app.secret_key = cfg.app_secret_key
-    app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
+    app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=10)
 
     logging.basicConfig(format='%(asctime)s %(levelname)s: %(message)s', level=logging.DEBUG)
     logging.info("App is started")
