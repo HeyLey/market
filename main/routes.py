@@ -56,7 +56,7 @@ def register():
 
 @bp.route('/logout', methods=['POST'])
 def logout():
-    session.pop('user')
+    session.pop('user', None)
     return redirect(url_for('main.login'))
 
 
