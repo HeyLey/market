@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <title>Sell</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/style/base.css" rel="stylesheet" media="screen">
+  </head>
+  <a href="/{{ username }}">My account</a>
+  <h1>Sell</h1>
+    <br>
+      <form action="" method="post">
+        <input type="text" placeholder="About" name="about" value="{{
+          request.form.about}}">
+         <input type="text" placeholder="Pic" name="pic" value="{{
+          request.form.pic }}">
+          <input type="text" placeholder="Price" name="price" value="{{
+          request.form.price }}">
+        <input class="btn btn-default" type="submit" value="Proceed">
+      </form>
+    {% if error %}
+        <p class="error"><strong>Error:</strong> {{ error }}
+    {% endif %}
+</html>

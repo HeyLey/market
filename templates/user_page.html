@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <title>{{ username }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/style/base.css" rel="stylesheet" media="screen">
+  </head>
+  <h1>Hello, {{ username }}!</h1>
+  <h3> Balance: {{ balance }} </h3>
+  <a href="/sell_item">
+       <button>Sell</button>
+  </a>
+  <br><br>
+  <body>
+    <div class="container">
+        <a href="/products"> Shop </a>
+    </div>
+    <div class="container">
+        <h3>My orders</h3>
+        <h4>Product   Price   isReturned</h4>
+        {% for o in orders %}
+             <div> {{ o }} {{ o.price }} {{ o.is_ret }}
+                <form action="{{ url_for('main.return_item', item_id=o.item_id) }}" method=post>
+                    <input type=submit value="Refund">
+                </form>
+             </div>
+        {% endfor %}
+    </div>
+    <div class="container">
+        <h3>My items</h3>
+        <h4>Product   Price   isInStock</h4>
+        {% for i in items %}
+             <div> {{ i.about }} {{ i.price }} {{ i.is_in_stock }}
+                <form action="{{ url_for('main.delete_item', item_id=i.item_id) }}" method=post>
+                    <input type=submit value="Don't sell">
+                </form>
+             </div>
+        {% endfor %}
+    </div>
+  </body>
+</html>

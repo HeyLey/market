@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <title>Products</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/style/base.css" rel="stylesheet" media="screen">
+  </head>
+  <h1>Products</h1>
+    <a href="/{{ username }}">My account</a>
+    <br>  <br>
+    <a href="/sell_item">
+       <button>Sell</button>
+    </a>
+    <br> <br>
+  <body>
+    <div class="container">
+      {% for i in items %}
+      <div>
+          {{ i.about }} {{ i.pic }} {{ i.price }}
+          <form action="{{ url_for('main.buy_item', item_id=i.item_id) }}" method=post>
+              <input type=submit value="Buy">
+          </form>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
