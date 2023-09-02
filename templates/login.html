@@ -1,30 +1,41 @@
 <html>
-  <head>
-    <title>Login</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="static/style/base.css" rel="stylesheet" media="screen">
-  </head>
-  <body>
-    <div class="container">
-        <a href="/products"> Shop </a>
-    </div>
-    <div class="container">
-      <h1>Please login</h1>
-      <br>
-      <form action="" method="post">
-        <input type="text" placeholder="Username" name="username" value="{{
-          request.form.username }}">
-         <input type="password" placeholder="Password" name="password" value="{{
-          request.form.password }}">
-        <input class="btn btn-default" type="submit" value="Login">
-      </form>
-      {% if error %}
-        <p class="error"><strong>Error:</strong> {{ error }}
-      {% endif %}
-
-    <div class="container">
-        <a href="/register"> Register </a>
-    </div>
-    </div>
-  </body>
+    <head>
+        <title>Login</title>
+        <link href="static/style/base.css" rel="stylesheet" media="screen">
+    </head>
+   <body>
+   <nav class="navbar is-top is-info ">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/products"> Go to shop </a>
+        </div>
+   </nav>
+   <div class="container">
+        <div>
+            </br>
+            <label class="label is-large">Login</label>
+            </br>
+        </div>
+       <div>
+            <form action="" method="post">
+                <div class="field">
+                    <input class="input" type="text" placeholder="Username" name="username" value="{{ request.form.username }}">
+                 </div>
+                <div class="field">
+                    <input class="input" type="password" placeholder="Password" name="password" value="{{ request.form.password }}">
+                </div>
+                <div class="buttons">
+                    <input class="control button is-primary" type="submit" value="Login">
+                    <div>
+                        <div class="button is-link is-light">
+                            <a href="/register">Register</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {% if error %}
+                <p class="error"><strong>Error:</strong> {{ error }} </p>  </br>
+            {% endif %}
+       </div>
+   </div>
+   </body>
 </html>

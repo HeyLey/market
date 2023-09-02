@@ -18,3 +18,5 @@ Please edit config.py
 App main:
 app.py
 
+Run app:
+python -m flask run 
