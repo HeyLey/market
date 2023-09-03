@@ -5,18 +5,19 @@ The basic use cases of a customer:
 - products going back into stock
 
 Start db (Mac OS M1):
-
+```
 arch -arm64 brew install postgresql@14
-
 brew services start postgresql
-
+```
 Then run init.sql
 
 Db Connection and secrets:
 Please edit config.py
 
-App main:
+App main file:
 app.py
 
 Run app:
+```
 python -m flask run 
+```
