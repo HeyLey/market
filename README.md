@@ -9,10 +9,15 @@ Start db (Mac OS M1):
 arch -arm64 brew install postgresql@14
 brew services start postgresql
 ```
-Then run init.sql
+Then run db/init.sql
 
 Db Connection and secrets:
 Please edit config.py
+
+Install requirements:
+```
+pip install -r requirements.txt
+```
 
 App main file:
 app.py
