@@ -114,7 +114,9 @@ def sell_item():
 def show_items():
     items = Item.query.filter_by(is_in_stock=True).all()
     if 'user' in session:
-        return render_template('products.html', items=items, username=session['user'])
+        username = session['user']
+        user_id = User.query.filter_by(username=username).first().user_id
+        return render_template('products.html', items=items, username=username, user_id=user_id)
     return render_template('products.html', items=items)
 
 
