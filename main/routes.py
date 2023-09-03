@@ -1,6 +1,10 @@
 from flask import render_template, request, url_for, redirect, session
+import config as cfg
 from flask import Blueprint
+from werkzeug.utils import secure_filename
+
 from main.models import User, Order, Item, db
+import os
 import datetime
 
 import logging
@@ -86,15 +90,19 @@ def sell_item():
         username = session['user']
         if request.method == 'POST':
             about = request.form['about']
-            pic = request.form['pic']
+            file = request.files['file']
             price = request.form['price']
             if about == "" or about.count(' ') == len(about) or not price.isdigit():
                 error = "Please add product info correct."
                 return render_template('sell_item.html', username=username, error=error)
-            if pic == "" or pic.count(' ') == len(pic):
-                pic = "0.png"
             user_id = User.query.filter_by(username=username).first().user_id
-            new_product = Item(user_id=user_id, about=about, pic=pic, price=price)
+            if 'file' not in request.files or file.filename == '':
+                new_product = Item(user_id=user_id, about=about, price=price)
+            else:
+                filename = username + str(datetime.datetime.now()) + file.filename
+                filename = secure_filename(filename)
+                file.save(os.path.join(cfg.upload_folder, filename))
+                new_product = Item(user_id=user_id, about=about, pic=filename, price=price)
             db.session.add(new_product)
             db.session.commit()
             return redirect(url_for('main.show_user_acc', username=username))

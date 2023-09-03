@@ -1,4 +1,5 @@
 app_secret_key = 'bad_key'
+upload_folder = 'static/img/'
 
 engine = "postgresql"
 username = "admin"

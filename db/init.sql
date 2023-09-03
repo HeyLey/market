@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS items (
     item_id INT GENERATED ALWAYS AS IDENTITY,
     user_id INT NOT NULL,
     about VARCHAR ( 50 ) NOT NULL,
-    pic VARCHAR ( 50 ) NOT NULL DEFAULT '0.png',
+    pic VARCHAR ( 500 ) NOT NULL DEFAULT '0.png',
     price INT NOT NULL,
     is_in_stock BOOLEAN NOT NULL,
     created_on TIMESTAMP NOT NULL,
