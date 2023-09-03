@@ -1,20 +1,43 @@
 <html>
   <head>
     <title>{{ username }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="static/style/base.css" rel="stylesheet" media="screen">
   </head>
-  <h1>Hello, {{ username }}!</h1>
-  <h3> Balance: {{ balance }} </h3>
-  <a href="/sell_item">
-       <button>Sell</button>
-  </a>
-  <br><br>
   <body>
+    <nav class="navbar is-top is-info">
+        <div class="navbar-item navbar-brand">
+            <a href="/products">
+                <button class="button is-link is-light">Go to shop</button>
+            </a>
+        </div>
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/sell_item">Sell item</a>
+        </div>
+     </nav>
+    </br>
     <div class="container">
-        <a href="/products"> Shop </a>
-    </div>
-    <div class="container">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>
+                        <label class="label is-large">Hello, {{ username }}!</label>
+                    </td>
+                    <td>
+                        <form action="{{ url_for('main.logout') }}" method=post>
+                            <input class="button is-ghost" type=submit value="Logout">
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <label class="label is-normal">Balance: {{ balance }}$</label>
+                        </div>
+                    </td>
+                </tr>
+            <tbody>
+        </table>
+        </br>
         <h3>My orders</h3>
         <h4>Product   Price   isReturned</h4>
         {% for o in orders %}
@@ -36,8 +59,5 @@
              </div>
         {% endfor %}
     </div>
-    <form action="{{ url_for('main.logout') }}" method=post>
-        <input type=submit value="Logout">
-    </form>
   </body>
 </html>
