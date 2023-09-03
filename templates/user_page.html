@@ -38,47 +38,61 @@
             <tbody>
         </table>
         </br>
-
-        <h3>My orders</h3>
-        <h4>Product   Price   isReturned</h4>
+        <div>
+            <label class="label is-medium">My orders</label>
+            </br>
+        </div>
         <table class="table">
+            <thead>
+                <tr>
+                    <th>Order #</th>
+                    <th>Price</th>
+                    <th>isReturned</th>
+                </tr>
+            </thead>
             <tbody>
-        {% for o in orders %}
+            {% for o in orders %}
             <tr>
-             <td> {{ o }}
-                 </td>
+                <td> {{ o }}</td>
                 <td>{{o.price}}$ </td>
                 <td>{{ o.is_ret }}</td>
                 <td>
-                <form action="{{ url_for('main.return_item', item_id=o.item_id) }}" method=post>
-                    <input type=submit value="Refund">
-                </form>
-             </td>
+                    <form action="{{ url_for('main.return_item', item_id=o.item_id) }}" method=post>
+                        <input class="button is-normal is-light" type=submit value="Refund">
+                    </form>
+                </td>
             </tr>
-        {% endfor %}
-        </tbody>
+            {% endfor %}
+            </tbody>
         </table>
-
-        <h3>My items</h3>
-        <h4>Product   Price   isInStock</h4>
+        </br>
+        <div>
+            <label class="label is-medium">My items</label>
+            </br>
+        </div>
         <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>isInStock</th>
+                </tr>
+            </thead>
             <tbody>
-
-        {% for i in items %}
+            {% for i in items %}
             <tr>
-            <td> {{ i.about }}
-                </td>
-                <td>{{i.price}}$</td>
-                <td>{{ i.is_in_stock }} </td>
-                <td>
-                <form action="{{ url_for('main.delete_item', item_id=i.item_id) }}" method=post>
-                    <input type=submit value="Don't sell">
-                </form>
-                </td>
+                 <td> {{ i.about }}</td>
+                 <td>{{i.price}}$</td>
+                 <td>{{ i.is_in_stock }} </td>
+                 <td>
+                    <form action="{{ url_for('main.delete_item', item_id=i.item_id) }}" method=post>
+                        <input class="button is-normal is-light" type=submit value="Don't sell">
+                    </form>
+                 </td>
             </tr>
-        {% endfor %}
-
-            </tbody> </table>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
   </br>
   </body>
