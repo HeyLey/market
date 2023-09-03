@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS items (
     item_id INT GENERATED ALWAYS AS IDENTITY,
     user_id INT NOT NULL,
     about VARCHAR ( 50 ) NOT NULL,
-    pic VARCHAR ( 50 ) DEFAULT '0.png',
+    pic VARCHAR ( 50 ) NOT NULL DEFAULT '0.png',
     price INT NOT NULL,
     is_in_stock BOOLEAN NOT NULL,
     created_on TIMESTAMP NOT NULL,
@@ -52,9 +52,10 @@ INSERT INTO items(user_id, price, about, pic, is_in_stock, created_on) VALUES(1,
 INSERT INTO items(user_id, price, about, pic, is_in_stock, created_on) VALUES(1, 50, 'Lipstick', '3.png', FALSE, CURRENT_TIMESTAMP);
 INSERT INTO items(user_id, price, about, pic, is_in_stock, created_on) VALUES(2, 500, 'Bag', '4.png', TRUE, CURRENT_TIMESTAMP);
 INSERT INTO items(user_id, price, about, pic, is_in_stock, created_on) VALUES(2, 100, 'Hat', '5.png', FALSE, CURRENT_TIMESTAMP);
-INSERT INTO items(user_id, price, about, pic, is_in_stock, created_on) VALUES(3, 1000, 'Dress', '6.png', TRUE, CURRENT_TIMESTAMP);
+INSERT INTO items(user_id, price, about, is_in_stock, created_on) VALUES(3, 700, 'iPhone 13', TRUE, CURRENT_TIMESTAMP);
 
-INSERT INTO orders(user_id, item_id, price, created_on, is_ret) VALUES (1, 9, 100, CURRENT_TIMESTAMP, FALSE);
-INSERT INTO orders(user_id, item_id, price, created_on, is_ret) VALUES (2, 7, 50, CURRENT_TIMESTAMP, FALSE);
+INSERT INTO orders(user_id, item_id, price, created_on, is_ret) VALUES (2, 3, 50, CURRENT_TIMESTAMP, FALSE);
+INSERT INTO orders(user_id, item_id, price, created_on, is_ret) VALUES (1, 5, 100, CURRENT_TIMESTAMP, FALSE);
+
 
 

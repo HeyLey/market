@@ -91,6 +91,8 @@ def sell_item():
             if about == "" or about.count(' ') == len(about) or not price.isdigit():
                 error = "Please add product info correct."
                 return render_template('sell_item.html', username=username, error=error)
+            if pic == "" or pic.count(' ') == len(pic):
+                pic = "0.png"
             user_id = User.query.filter_by(username=username).first().user_id
             new_product = Item(user_id=user_id, about=about, pic=pic, price=price)
             db.session.add(new_product)
