@@ -8,7 +8,7 @@
         <div class="navbar-brand">
             <a class="navbar-item" href="/@{{username}}">My account</a>
         </div>
-        <div class="navbar-item "navbar-brand">
+        <div class="navbar-item navbar-brand">
             <a href="/products">
                 <button class="button is-link is-light">Go to shop</button>
             </a>
@@ -28,11 +28,14 @@
                 <div class="field">
                     <input class="input" type="text" placeholder="Price (only digits)" name="price" value="{{ request.form.price }}">
                 </div>
-                <div class="file">
+                <div id="file-js" class="file is-small">
                     <label class="file-label">
                         <input class="file-input"  type="file" name="file" accept=".jpg,.jpeg,.png">
                         <span class="file-cta">
                             <span class="file-label">Choose a file…</span>
+                        </span>
+                        <span class="file-name">
+                            No file uploaded
                         </span>
                     </label>
                 </div>
@@ -44,6 +47,15 @@
             {% endif %}
         </div>
      </div>
+    <script>
+    const fileInput = document.querySelector('#file-js input[type=file]');
+    fileInput.onchange = () => {
+        if (fileInput.files.length > 0) {
+            const fileName = document.querySelector('#file-js .file-name');
+            fileName.textContent = fileInput.files[0].name;
+        }
+    }
+    </script>
   </body>
 </html>
 

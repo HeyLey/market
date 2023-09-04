@@ -33,6 +33,7 @@
                     <td>
                         <img src="static/img/{{ i.pic }}" width="100" height="200">
                     </td>
+                    <td>{{ i.price }}$</td>
                     <td>
                         <form action="{{ url_for('main.buy_item', item_id=i.item_id) }}" method=post>
                             <input class="control button is-normal is-primary" type=submit value="Buy" disabled>
@@ -45,6 +46,7 @@
                     <td>
                         <img src="static/img/{{ i.pic }}" width="100" height="200">
                     </td>
+                    <td>{{ i.price }}$</td>
                     <td>
                         <form action="{{ url_for('main.buy_item', item_id=i.item_id) }}" method=post>
                             <input class="control button is-normal is-primary" type=submit value="Buy">
