@@ -1,6 +1,7 @@
 from sqlalchemy import Integer, String, DateTime, Boolean
 from flask_sqlalchemy import SQLAlchemy
 import datetime
+from sqlalchemy.ext.hybrid import hybrid_property
 
 db = SQLAlchemy()
 
@@ -28,12 +29,20 @@ class User(db.Model):
 class Item(db.Model):
     __tablename__ = 'items'
     item_id = db.Column(Integer, primary_key=True)
-    user_id = db.Column(Integer)
+    _user_id = db.Column('user_id', Integer, nullable=False)
     about = db.Column(String(50), unique=False)
     pic = db.Column(String(50), unique=False)
     price = db.Column(Integer)
     is_in_stock = db.Column(Boolean)
     created_on = db.Column(DateTime)
+
+    @hybrid_property
+    def user_id(self):
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, value):
+        raise AttributeError("Can't set user_id attribute in Item")
 
     def __init__(self, user_id, about, pic='0.png', price=0):
         self.user_id = user_id
@@ -50,12 +59,20 @@ class Item(db.Model):
 class Order(db.Model):
     __tablename__ = 'orders'
     order_id = db.Column(Integer, primary_key=True)
-    user_id = db.Column(Integer)
+    _user_id = db.Column('user_id', Integer, nullable=False)
     item_id = db.Column(Integer)
     price = db.Column(Integer)
     created_on = db.Column(DateTime)
     is_ret = db.Column(Boolean)
     returned_on = db.Column(DateTime)
+
+    @hybrid_property
+    def user_id(self):
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, value):
+        raise AttributeError("Can't set user_id attribute in Item")
 
     def __init__(self, user_id, item_id, price):
         self.user_id = user_id
