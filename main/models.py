@@ -72,7 +72,7 @@ class Order(db.Model):
 
     @user_id.setter
     def user_id(self, value):
-        raise AttributeError("Can't set user_id attribute in Item")
+        raise AttributeError("Can't set user_id attribute in Order")
 
     def __init__(self, user_id, item_id, price):
         self.user_id = user_id
